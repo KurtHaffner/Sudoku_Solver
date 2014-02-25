@@ -37,7 +37,7 @@ public class Sudoku {
             
             nextLine = gridFill.nextLine();
 
-            for (int i = 0; i < 9; i=i++) {
+            for (int i = 0; i < 9;i++) {
                     grid[iterate][i] = nextLine.charAt(gridNum);
                     gridNum = gridNum + 2;
             }
