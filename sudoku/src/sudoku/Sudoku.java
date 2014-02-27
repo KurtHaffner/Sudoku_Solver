@@ -52,20 +52,31 @@ public class Sudoku {
 
         if (row < 9 && column < 9) {
             if (sudoGrid[row][column] == '0') {
-
+                for (int num = 1; num < 10; num++) {
+                    for (int test = 0; test < 9; test++) {
+                        if (sudoGrid[row][test] == num) {
+                            
+                        }
+                        if (sudoGrid[test][column] == num) {
+                            
+                        }
+                    }
+                }
             } else if (column == 8) {
                 solver(sudoGrid, row++, 0);
             } else {
                 solver(sudoGrid, row, column++);
             }
         }
-        
+
         System.out.println("The solved sudoku puzzle is: ");
-        
+
         for (int j = 0; j < 9; j++) {
             for (int k = 0; k < 9; k++) {
-                System.out.print(sudoGrid[j][k]);
+                System.out.print(sudoGrid[j][k] + " ");
             }
+            System.out.println("");
+            System.out.println("");
             System.out.println("");
         }
 
