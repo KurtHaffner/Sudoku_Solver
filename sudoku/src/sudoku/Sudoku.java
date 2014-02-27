@@ -62,7 +62,7 @@ public class Sudoku {
                         }
                     }
                 }
-            } else if (column == 8) {
+            } if (column == 8) {
                 solver(sudoGrid, row++, 0);
             } else {
                 solver(sudoGrid, row, column++);
