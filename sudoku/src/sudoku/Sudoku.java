@@ -34,23 +34,41 @@ public class Sudoku {
         while (gridFill.hasNext()) {
 
             gridNum = 0;
-            
+
             nextLine = gridFill.nextLine();
 
-            for (int i = 0; i < 9;i++) {
-                    grid[iterate][i] = nextLine.charAt(gridNum);
-                    gridNum = gridNum + 2;
+            for (int i = 0; i < 9; i++) {
+                grid[iterate][i] = nextLine.charAt(gridNum);
+                gridNum = gridNum + 2;
             }
 
             iterate++;
         }
 
+        solver(grid, 0, 0);
+    }
+
+    public static void solver(char sudoGrid[][], int row, int column) {
+
+        if (row < 9 && column < 9) {
+            if (sudoGrid[row][column] == '0') {
+
+            } else if (column == 8) {
+                solver(sudoGrid, row++, 0);
+            } else {
+                solver(sudoGrid, row, column++);
+            }
+        }
+        
+        System.out.println("The solved sudoku puzzle is: ");
+        
         for (int j = 0; j < 9; j++) {
             for (int k = 0; k < 9; k++) {
-                System.out.print(grid[j][k]);
+                System.out.print(sudoGrid[j][k]);
             }
             System.out.println("");
         }
+
     }
 
 }
