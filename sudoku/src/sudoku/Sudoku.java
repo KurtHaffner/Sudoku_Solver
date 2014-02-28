@@ -2,6 +2,7 @@ package sudoku;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -60,22 +61,24 @@ public class Sudoku {
         //Set finish equal to solver at position (0,0). This will do the 
         //recursion to solve the puzzle.
         boolean finish = solver(0, 0);
+        
+        //Make a string and set it to the file name with .solved added on.
+        String fileName;
+        fileName = puzzle.getName() + ".solved";
+        
+        //Set a new file to the .solved name and make a PrintWriter for it.
+        File solvedPuzzle = new File(fileName);
+        PrintWriter solvePrint = new PrintWriter(solvedPuzzle);
 
-        //If the puzzle is solved, print out the puzzle row by row.
+        //If the puzzle is solved, print out the puzzle row by row to a file.
         if (finish == true) {
-            System.out.println("The solved sudoku puzzle is: ");
-            System.out.println("");
-            System.out.println("");
-
             for (int j = 0; j < 9; j++) {
                 for (int k = 0; k < 9; k++) {
-                    System.out.print(grid[j][k] + " ");
+                    solvePrint.print(grid[j][k] + " ");
                 }
-                System.out.println("");
+                //Hit "enter" for each new line.
+                solvePrint.println("\n");
             }
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
         }
         else
             System.out.println("This puzzle appears unsolvable.");
