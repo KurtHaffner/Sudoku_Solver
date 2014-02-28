@@ -74,11 +74,13 @@ public class Sudoku {
         if (finish == true) {
             for (int j = 0; j < 9; j++) {
                 for (int k = 0; k < 9; k++) {
-                    solvePrint.print(grid[j][k] + " ");
+                    solvePrint.print("" + grid[j][k] + " ");
                 }
                 //Hit "enter" for each new line.
-                solvePrint.println("\n");
+                solvePrint.print("\n");
             }
+            //Close the PrintWriter to finish the file.
+            solvePrint.close();
         }
         else
             System.out.println("This puzzle appears unsolvable.");
