@@ -50,6 +50,8 @@ public class Sudoku {
 
         if (finish == true) {
             System.out.println("The solved sudoku puzzle is: ");
+            System.out.println("");
+            System.out.println("");
 
             for (int j = 0; j < 9; j++) {
                 for (int k = 0; k < 9; k++) {
