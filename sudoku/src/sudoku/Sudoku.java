@@ -77,7 +77,7 @@ public class Sudoku {
 
                     if (row < 8 && column == 8) {
                         valid = solver(row + 1, 0);
-                    } else if (row <= 8 && column < 8) {
+                    } else if (column < 8) {
                         valid = solver(row, column + 1);
                     }
                     if (row == 8 && column == 8) {
@@ -97,7 +97,7 @@ public class Sudoku {
 
             if (row < 8 && column == 8) {
                 valid = solver(row + 1, 0);
-            } else if (row <= 8 && column < 8) {
+            } else if (column < 8) {
                 valid = solver(row, column + 1);
             }
             if (row == 8 && column == 8) {
