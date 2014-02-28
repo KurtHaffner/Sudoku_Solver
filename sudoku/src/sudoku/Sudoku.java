@@ -56,9 +56,10 @@ public class Sudoku {
                     System.out.print(grid[j][k] + " ");
                 }
                 System.out.println("");
-                System.out.println("");
-                System.out.println("");
             }
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
         }
     }
 
@@ -72,7 +73,7 @@ public class Sudoku {
                 if (isValid(row, column, test) == true) {
                     grid[row][column] = (char) (((int) '0') + test);
 
-                    if (row == 8 && column <= 8) {
+                    if (row < 8 && column == 8) {
                         valid = solver(row + 1, 0);
                     } else if (row <= 8 && column < 8) {
                         valid = solver(row, column + 1);
@@ -92,7 +93,7 @@ public class Sudoku {
         } //Used if the position is already finished.
         else {
 
-            if (row <= 8 && column == 8) {
+            if (row < 8 && column == 8) {
                 valid = solver(row + 1, 0);
             } else if (row <= 8 && column < 8) {
                 valid = solver(row, column + 1);
@@ -107,8 +108,28 @@ public class Sudoku {
     public static boolean isValid(int row, int column, int number) {
 
         char temp = (char) (((int) '0') + number);
-        int tempRow = row;
-        int tempCol = column;
+        int tempRow = 0;
+        int tempCol = 0;
+        
+        if (row == 0 || row == 1 || row == 2){
+            tempRow = 0;
+        }
+        else if (row == 3 || row == 4 || row == 5){
+            tempRow = 3;
+        }
+        else{
+            tempRow = 6;
+        }
+        
+        if (column == 0 || column == 1 || column == 2){
+            tempCol = 0;
+        }
+        else if (column == 3 || column == 4 || column == 5){
+            tempCol = 3;
+        }
+        else{
+            tempCol = 6;
+        }
 
         for (int i = 0; i < 9; i++) {
             if (grid[row][i] == temp) {
@@ -116,6 +137,14 @@ public class Sudoku {
             }
             if (grid[i][column] == temp) {
                 return false;
+            }
+        }
+        
+        for(int j = tempRow; j < tempRow + 3; j++){
+            for(int k = tempCol; k < tempCol + 3; k++){
+                if(grid[j][k] == temp){
+                    return false;
+                }
             }
         }
 
