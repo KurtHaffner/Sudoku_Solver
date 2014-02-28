@@ -110,8 +110,8 @@ public class Sudoku {
     public static boolean isValid(int row, int column, int number) {
 
         char temp = (char) (((int) '0') + number);
-        int tempRow = 0;
-        int tempCol = 0;
+        int tempRow;
+        int tempCol;
         
         if (row == 0 || row == 1 || row == 2){
             tempRow = 0;
