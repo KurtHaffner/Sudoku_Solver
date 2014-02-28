@@ -10,6 +10,8 @@ import java.util.Scanner;
  */
 public class Sudoku {
 
+    public static char[][] grid;
+
     public static void main(String[] args) throws FileNotFoundException {
 
         File puzzle = null;
@@ -24,7 +26,6 @@ public class Sudoku {
         Scanner gridFill;
         gridFill = new Scanner(puzzle);
 
-        char[][] grid;
         grid = new char[9][9];
 
         String nextLine;
@@ -45,41 +46,78 @@ public class Sudoku {
             iterate++;
         }
 
-        solver(grid, 0, 0);
+        boolean finish = solver(0, 0);
+
+        if (finish == true) {
+            System.out.println("The solved sudoku puzzle is: ");
+
+            for (int j = 0; j < 9; j++) {
+                for (int k = 0; k < 9; k++) {
+                    System.out.print(grid[j][k] + " ");
+                }
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+            }
+        }
     }
 
-    public static void solver(char sudoGrid[][], int row, int column) {
+    public static boolean solver(int row, int column) {
 
-        if (row < 9 && column < 9) {
-            if (sudoGrid[row][column] == '0') {
-                for (int num = 1; num < 10; num++) {
-                    for (int test = 0; test < 9; test++) {
-                        if (sudoGrid[row][test] == num) {
-                            
-                        }
-                        if (sudoGrid[test][column] == num) {
-                            
-                        }
+        int test = 1;
+        boolean valid = false;
+
+        if (grid[row][column] == '0') {
+            while (valid != true && test <= 9) {
+                if (isValid(row, column, test) == true) {
+                    grid[row][column] = (char) (((int) '0') + test);
+
+                    if (row == 8 && column <= 8) {
+                        valid = solver(row + 1, 0);
+                    } else if (row <= 8 && column < 8) {
+                        valid = solver(row, column + 1);
                     }
+                    if (row == 8 && column == 8) {
+                        return true;
+                    }
+
+                    if (valid == false) {
+                        grid[row][column] = '0';
+                    }
+                } else {
+                    grid[row][column] = '0';
                 }
-            } if (column == 8) {
-                solver(sudoGrid, row++, 0);
-            } else {
-                solver(sudoGrid, row, column++);
+                test++;
+            }
+        } //Used if the position is already finished.
+        else {
+
+            if (row <= 8 && column == 8) {
+                valid = solver(row + 1, 0);
+            } else if (row <= 8 && column < 8) {
+                valid = solver(row, column + 1);
+            }
+            if (row == 8 && column == 8) {
+                return true;
+            }
+        }
+        return valid;
+    }
+
+    public static boolean isValid(int row, int column, int number) {
+
+        char temp = (char)(((int)'0')+number);
+
+        for (int i = 0; i < 9; i++) {
+            if (grid[row][i] == temp) {
+                return false;
+            }
+            if (grid[i][column] == temp) {
+                return false;
             }
         }
 
-        System.out.println("The solved sudoku puzzle is: ");
-
-        for (int j = 0; j < 9; j++) {
-            for (int k = 0; k < 9; k++) {
-                System.out.print(sudoGrid[j][k] + " ");
-            }
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-        }
-
+        return true;
     }
 
 }
