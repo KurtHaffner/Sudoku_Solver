@@ -106,7 +106,9 @@ public class Sudoku {
 
     public static boolean isValid(int row, int column, int number) {
 
-        char temp = (char)(((int)'0')+number);
+        char temp = (char) (((int) '0') + number);
+        int tempRow = row;
+        int tempCol = column;
 
         for (int i = 0; i < 9; i++) {
             if (grid[row][i] == temp) {
